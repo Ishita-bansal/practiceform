@@ -1,0 +1,14 @@
+
+.maincontainer2{
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border:4px solid;
+    background:linear-gradient(135deg,blue,violet) ;
+}
+
+.maincontainer2 img{
+    width:500px;
+    height:500px;
+}

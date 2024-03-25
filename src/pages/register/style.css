@@ -1,0 +1,29 @@
+
+.maincontainer{
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border:4px solid;
+    background:linear-gradient(135deg,blue,violet) ;
+}
+
+
+
+.maincontainer img{
+    max-width:650px;
+    max-height:650px;
+}
+
+.formcontainer{
+    width:100%;
+    height:100%;
+    background-color: #f2f2f2;
+}
+
+
+.btn{
+    display:flex;
+    justify-content: flex-end;
+  
+}
