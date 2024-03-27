@@ -7,6 +7,8 @@ import ErrorHandle from '../../components/errorHandle/index';
 import { useNavigate } from 'react-router-dom';
 import {toast} from "react-toastify";
 import {TOAST_MESSAGE} from "../../toastify"
+import { useDispatch, useSelector} from "react-redux";
+import {login} from "../../redux/action/index"
 
 const emailRegExp =
   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -27,11 +29,13 @@ password: yup
   .required("Required*")
 })
 function Login(){
-   
+   const dispatch = useDispatch();
    const navigate = useNavigate();
     const onSubmit = ((values)=>{
-      console.log(values);
-     let allusers =  JSON.parse(localStorage.getItem("userData"));
+      // console.log(values);
+      let allusers =  JSON.parse(localStorage.getItem("userData"));
+
+      // const userData = useSelector((state)=>state.Reducer.allusers).find((user)=>user.email === values.email && user.password === values.password);
 
    const userData = allusers?.find((users)=>{
          return users.email===values.email && users.password===values.password 
@@ -42,7 +46,8 @@ function Login(){
       }
       else{
         toast.success(TOAST_MESSAGE.Login);
-        localStorage.setItem("loggedUser",JSON.stringify({...userData,loggedIn:true})) 
+        // localStorage.setItem("loggedUser",JSON.stringify({...userData,loggedIn:true})) 
+        dispatch(login({userData}))
         navigate('/dashboard');
       }
     })
@@ -54,7 +59,7 @@ function Login(){
     })  
  
     const {values , handleSubmit ,touched, errors , setTouched,setFieldValue} = formik;
-    console.log("touched data" ,touched)
+    // console.log("touched data" ,touched)
     return(
         <>
         <div class="row maincontainer2">
