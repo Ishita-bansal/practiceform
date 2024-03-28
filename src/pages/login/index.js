@@ -35,8 +35,9 @@ function Login(){
       // console.log(values);
       let allusers =  JSON.parse(localStorage.getItem("userData"));
 
-      // const userData = useSelector((state)=>state.Reducer.allusers).find((user)=>user.email === values.email && user.password === values.password);
-
+      // let allusers = useSelector((state)=> state)
+      // console.log("users=",)
+    
    const userData = allusers?.find((users)=>{
          return users.email===values.email && users.password===values.password 
       })
@@ -45,10 +46,9 @@ function Login(){
          toast.error(TOAST_MESSAGE.Logincheck);
       }
       else{
-        toast.success(TOAST_MESSAGE.Login);
-        // localStorage.setItem("loggedUser",JSON.stringify({...userData,loggedIn:true})) 
-        dispatch(login({userData}))
+        dispatch(login(userData))
         navigate('/dashboard');
+        toast.success(TOAST_MESSAGE.Login);
       }
     })
 

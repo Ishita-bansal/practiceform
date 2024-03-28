@@ -3,8 +3,13 @@ import React,{useState} from 'react';
 import {useNavigate} from "react-router-dom"
 import { toast } from "react-toastify";
 import {TOAST_MESSAGE} from "../../toastify"
+import {useSelector,useDispatch} from "react-redux";
+import { logout } from '../../redux/action';
 
 function Dashboard(){
+  let dispatch = useDispatch();
+  const data = useSelector((state)=>state.Reducer)
+  console.log("userdata",data);
 
     const style = {
         position: 'absolute',
@@ -23,7 +28,7 @@ function Dashboard(){
     const [openMd, setopenMd] = useState(false);
 
     const handleLogout = ()=>{
-        localStorage.removeItem("loggedUser");
+        dispatch(logout());
         toast.success(TOAST_MESSAGE.Logout);
         navigate('/login');
     }
@@ -43,7 +48,7 @@ function Dashboard(){
         setopenMd(false);
     }
 
-    const loginUser = JSON.parse(localStorage.getItem("loggedUser"));
+
     return(
         <>
         <AppBar>
@@ -61,7 +66,7 @@ function Dashboard(){
                   fontSize: "14px",
                   textTransform: "capitalize",
                 }}>
-                {loginUser.name?.[0]}
+                {data?.name?.[0]}
               </Avatar>
             </IconButton>
           </Tooltip>

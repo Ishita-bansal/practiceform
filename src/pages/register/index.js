@@ -11,6 +11,8 @@ import {useNavigate} from 'react-router-dom';
 import ErrorHandle from "../../components/errorHandle/index";
 import {toast} from "react-toastify";
 import {TOAST_MESSAGE} from "../../toastify";
+import {useDispatch, useSelector} from "react-redux";
+import { register } from "../../redux/action";
 
 const emailRegExp =
   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -47,36 +49,68 @@ const validationSchema = yup.object().shape({
 });
 
 function Register() {
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+const storeddata = useSelector((state)=>state?.Registerreduce)
+console.log("data stored",storeddata);
+
   const onSubmit = (values) => {
-    let storeddata = JSON.parse(localStorage.getItem("userData"))?? [];
-    console.log("data=",storeddata);
-
-    if (!Array.isArray(storeddata)) {
-      storeddata = [];
+   console.log("values = ", values);
+   
+     
+      if (!Array.isArray(storeddata.registerUser)) {
+        storeddata.registerUser = [];
+        storeddata.registerUser.push(values); 
     }
-
-    let emailarray = storeddata?.map((obj) => {
-      return obj.email;
-    });
-
-    if (emailarray?.includes(values.email)) {
-       return  toast.error(TOAST_MESSAGE. Emailcheck)
-    }
-     else {
-      let arr = [];
-      if (storeddata === null) {
-        arr.push(values);
-      } else {
-        arr = [...storeddata, values];
+    else{
+      storeddata.registerUser = [{...storeddata , values}]
+      dispatch(register(storeddata));
       }
-    console.log(arr);
-      localStorage.setItem("userData", JSON.stringify(arr));
-      toast.success(TOAST_MESSAGE.Register);
-      navigate('/login');
-    }
   };
+  
+    // else
+    //      storeddata.registerUser.push(values);
+         
+    //         //  dispatch(register(values))
+    //  }
+    //  else{
+
+    //   storeddata.registerUser = [...storeddata ,values]
+    //  }
+    // console.log(values);
+    // let storeddata = JSON.parse(localStorage.getItem("userData"))?? [];
+    // console.log("data=",storeddata);
+
+    // if (!Array.isArray(storeddata)) {
+    //   storeddata = [];
+    // }
+
+    // let emailarray = storeddata?.map((obj) => {
+    //   return obj.email;
+    // });
+
+    // console.log("email array",emailarray);
+
+    // if(emailarray?.includes(values.email)) {
+    //    return  toast.error(TOAST_MESSAGE. Emailcheck)
+    // }
+
+    //  else {
+    //   let arr = [];
+    //   if (storeddata === null) {
+    //     arr.push(values);
+    //   } else {
+    //     arr = [...storeddata, values];
+    //   }
+    // console.log("arr",arr);
+    // dispatch(register(arr));
+    //   navigate('/login');
+    //   toast.success(TOAST_MESSAGE.Register);
+    // }
+
+      // dispatch(register(arr));
+  // };
   const formik = useFormik({
     initialValues: defaultvalues,
     onSubmit: onSubmit,

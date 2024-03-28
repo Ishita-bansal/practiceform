@@ -1,4 +1,5 @@
 export const ACTIONTYPE = {
     LOGIN:"LOGIN",
-    LOGOUT:"LOGOUT"
+    LOGOUT:"LOGOUT",
+    REGISTER:"REGISTER"
 }

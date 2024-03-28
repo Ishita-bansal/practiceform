@@ -1,26 +1,33 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Login, Register,Dashboard ,Page404} from "../pages";
-function Router(){
+import { Login, Register, Dashboard, Page404 } from "../pages";
+import { useSelector } from "react-redux";
 
-    const PublicRouter = ({element})=>{
-        const userData = JSON.parse(localStorage.getItem("loggedUser"));
-        return !userData?.loggedIn ? element : Navigate('/dashboard')
-    }
+function Router() {
+  const data = useSelector((state) => state?.Reducer);
 
-    const PrivateRouter = ({element})=>{
-      const userData = JSON.parse(localStorage.getItem("loggedUser"));
-       return userData?.loggedIn ? element : Navigate('/login')
-    }
-    return(
-        <BrowserRouter>
-           <Routes>
-              <Route path="/register" element={ <PublicRouter element={<Register/>}/> } />
-              <Route path="/login" element={ <PublicRouter element={<Login/>} /> } />
-              <Route path="/dashboard" element={ <PrivateRouter element={<Dashboard/>}/>} />
-              <Route path="/*" element={<Page404/>}/>
-           </Routes>
-        </BrowserRouter>
-    )
+  const PublicRouter = ({ element }) => {
+    return !data?.isLoggedIn ? element : Navigate("/dashboard");
+  };
+
+  const PrivateRouter = ({ element }) => {
+    return data?.isLoggedIn ? element : Navigate("/login");
+  };
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/register"
+          element={<PublicRouter element={<Register />} />}
+        />
+        <Route path="/login" element={<PublicRouter element={<Login />} />} />
+        <Route
+          path="/dashboard"
+          element={<PrivateRouter element={<Dashboard />} />}
+        />
+        <Route path="/*" element={<Page404 />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default Router;
