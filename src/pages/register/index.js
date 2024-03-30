@@ -56,17 +56,26 @@ const storeddata = useSelector((state)=>state?.Registerreduce)
 console.log("data stored",storeddata);
 
   const onSubmit = (values) => {
-   console.log("values = ", values);
+  //  console.log("values = ", values);
    
      
-      if (!Array.isArray(storeddata.registerUser)) {
-        storeddata.registerUser = [];
-        storeddata.registerUser.push(values); 
-    }
-    else{
-      storeddata.registerUser = [{...storeddata , values}]
-      dispatch(register(storeddata));
-      }
+  //     if (!Array.isArray(storeddata.registerUser)) {
+  //       storeddata.registerUser = [];
+  //       storeddata.registerUser.push(values); 
+  //   }
+  //   else{
+  //     storeddata.registerUser = [{...storeddata , values}]
+  //     dispatch(register(storeddata));
+  //     }
+
+
+    const registerUser = Array.isArray(storeddata.registerUser) ?
+     [storeddata.registerUser.push(values)] : [];
+    console.log("register user",storeddata.registerUser);
+     
+       dispatch(register(storeddata.registerUser));
+    
+    navigate('/login');
   };
   
     // else

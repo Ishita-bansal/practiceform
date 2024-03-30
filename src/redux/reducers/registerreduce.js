@@ -10,7 +10,7 @@ const Registerreduce = (state = defaultvalues, action) => {
     case ACTIONTYPE.REGISTER:
       return {
         ...state,
-        registerUser: action.payload,
+        registerUser:action.payload,
       };
     default:
       return state;
