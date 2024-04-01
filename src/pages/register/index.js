@@ -71,10 +71,8 @@ console.log("data stored",storeddata);
 
     const registerUser = Array.isArray(storeddata.registerUser) ?
      [storeddata.registerUser.push(values)] : [];
-    console.log("register user",storeddata.registerUser);
-     
+    console.log("register user",storeddata.registerUser); 
        dispatch(register(storeddata.registerUser));
-    
     navigate('/login');
   };
   

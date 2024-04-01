@@ -31,16 +31,19 @@ password: yup
 function Login(){
    const dispatch = useDispatch();
    const navigate = useNavigate();
-    const onSubmit = ((values)=>{
-      // console.log(values);
-      let allusers =  JSON.parse(localStorage.getItem("userData"));
 
-      // let allusers = useSelector((state)=> state)
-      // console.log("users=",)
-    
-   const userData = allusers?.find((users)=>{
+   let allusers = useSelector((state)=> state?.Registerreduce  || [])
+   console.log("users=",allusers);
+
+
+    const onSubmit = ((values)=>{
+      
+      console.log(values);
+      // let allusers =  JSON.parse(localStorage.getItem("userData"));
+
+    const userData = allusers?.find((users)=>{
          return users.email===values.email && users.password===values.password 
-      })
+      }) 
 
       if(userData === undefined){
          toast.error(TOAST_MESSAGE.Logincheck);
