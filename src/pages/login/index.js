@@ -107,7 +107,7 @@ function Login() {
               errors={errors}
               fieldName="password"
             />
-            <Button variant="contained" color="primary" type="submit">
+            <Button style={{width:"fit-content"}} variant="contained" color="primary" type="submit">
               Login
             </Button>
           </form>

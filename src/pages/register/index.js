@@ -104,7 +104,7 @@ const storeddata = useSelector((state)=>state?.Registerreduce)
           class="col-lg-6 col-md-12 col-sm-12 formcontainer"
           style={{ maxWidth: "650px", maxHeight: "650px" }}
         >
-          <form onSubmit={handleSubmit} style={{ padding: "15px" }}>
+          <form onSubmit={handleSubmit} style={{ padding:"15px",display:"flex",flexDirection:"column"}}>
             <TextField
               label="Name"
               type="text"
@@ -183,7 +183,7 @@ const storeddata = useSelector((state)=>state?.Registerreduce)
               />
             </FormGroup>
             <ErrorHandle touched={touched} errors={errors} fieldName="checked"/>
-            <Button variant="contained" color="primary" type="submit">
+            <Button style={{width:"fit-content"}} variant="contained" color="primary" type="submit">
               Register
             </Button>
           </form>
