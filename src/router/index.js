@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Login, Register, Dashboard, Page404 } from "../pages";
+import { Login, Register, Dashboard, Page404 ,Profile} from "../pages";
 import { useSelector } from "react-redux";
 
 function Router() {
@@ -19,10 +19,14 @@ function Router() {
           path="/register"
           element={<PublicRouter element={<Register />} />}
         />
-        <Route path="/login" element={<PublicRouter element={<Login />} />} />
+        <Route path="/login"
+         element={<PublicRouter element={<Login />} />} />
         <Route
           path="/dashboard"
           element={<PrivateRouter element={<Dashboard />} />}
+        />
+        <Route path="/profile" 
+        element={<PrivateRouter  element={<Profile/>}/> }
         />
         <Route path="/*" element={<Page404 />} />
       </Routes>

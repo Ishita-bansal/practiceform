@@ -5,7 +5,7 @@ const defaultvalues = {
 };
 
 const Registerreduce = (state = defaultvalues, action) => {
-    console.log("actions=", action.payload)
+   
   switch (action.type) {
     case ACTIONTYPE.REGISTER:
       return {

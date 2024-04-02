@@ -1,0 +1,52 @@
+form{
+    display:flex;
+    gap:50px;
+}
+
+.formitems{
+    display:flex; 
+    align-items:center ;
+    gap:30px;
+    padding: 20px;
+}
+
+.formitems label{
+    font-size:25px;
+    font-weight: bold;
+}
+
+.formitems input{
+    width:280px;
+    height:50px;
+    border-radius:25px;
+    padding:20px;
+    border:1px solid  grey;
+    font-size:25px;
+}
+
+.formitems input:focus{
+    border:none;
+}
+
+.btn{
+    width:70%;
+    display:flex;
+    justify-content: flex-end;
+    padding:20px;
+    border:none;
+
+}
+
+.btn button{
+    width:200px;
+    height:50px;
+    border-radius: 25px;
+    background-color: cadetblue;
+    border:none;
+    font-size:25px;
+}
+
+.btn button:hover{
+    border:none;
+    background-color: rgba(95, 158, 160, 0.322);
+}

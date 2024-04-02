@@ -8,12 +8,11 @@ const initialvalues = {
 };
 
 const Reducer = (state = initialvalues, action) => {
-  console.log("actions",action);
   switch (action.type) {
     case ACTIONTYPE.LOGIN:
       return {
         ...state,
-        name: action.payload.name,
+        name: action.payload.username,
         email: action.payload.email,
         password: action.payload.password,
         isLoggedIn: true,
@@ -25,6 +24,14 @@ const Reducer = (state = initialvalues, action) => {
         email: "",
         password: "",
         isLoggedIn: false,
+      };
+    case ACTIONTYPE.UPDATE:
+      return {
+        ...state,
+        name: action.payload.username,
+        email: action.payload.email,
+        password: action.payload.password,
+        isLoggedIn: true,
       };
     default:
       return state;

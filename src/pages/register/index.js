@@ -53,71 +53,23 @@ function Register() {
   const navigate = useNavigate();
 
 const storeddata = useSelector((state)=>state?.Registerreduce)
-console.log("data stored",storeddata);
 
   const onSubmit = (values) => {
-  //  console.log("values = ", values);
-   
-     
-  //     if (!Array.isArray(storeddata.registerUser)) {
-  //       storeddata.registerUser = [];
-  //       storeddata.registerUser.push(values); 
-  //   }
-  //   else{
-  //     storeddata.registerUser = [{...storeddata , values}]
-  //     dispatch(register(storeddata));
-  //     }
+     let emailarray = storeddata.registerUser?.map((obj) => {
+      return obj.email;
+    });
 
-
-    const registerUser = Array.isArray(storeddata.registerUser) ?
-     [storeddata.registerUser.push(values)] : [];
-    console.log("register user",storeddata.registerUser); 
+    if(emailarray?.includes(values.email)) {
+       return  toast.error(TOAST_MESSAGE. Emailcheck)
+    }
+    else{
+      const registerUser = Array.isArray(storeddata.registerUser) ?
+      [storeddata.registerUser.push(values)] : [];
        dispatch(register(storeddata.registerUser));
+    }
     navigate('/login');
   };
   
-    // else
-    //      storeddata.registerUser.push(values);
-         
-    //         //  dispatch(register(values))
-    //  }
-    //  else{
-
-    //   storeddata.registerUser = [...storeddata ,values]
-    //  }
-    // console.log(values);
-    // let storeddata = JSON.parse(localStorage.getItem("userData"))?? [];
-    // console.log("data=",storeddata);
-
-    // if (!Array.isArray(storeddata)) {
-    //   storeddata = [];
-    // }
-
-    // let emailarray = storeddata?.map((obj) => {
-    //   return obj.email;
-    // });
-
-    // console.log("email array",emailarray);
-
-    // if(emailarray?.includes(values.email)) {
-    //    return  toast.error(TOAST_MESSAGE. Emailcheck)
-    // }
-
-    //  else {
-    //   let arr = [];
-    //   if (storeddata === null) {
-    //     arr.push(values);
-    //   } else {
-    //     arr = [...storeddata, values];
-    //   }
-    // console.log("arr",arr);
-    // dispatch(register(arr));
-    //   navigate('/login');
-    //   toast.success(TOAST_MESSAGE.Register);
-    // }
-
-      // dispatch(register(arr));
-  // };
   const formik = useFormik({
     initialValues: defaultvalues,
     onSubmit: onSubmit,
