@@ -1,12 +1,7 @@
 .forms{
     display:flex;
 }
-.btns{
-    display:flex;
-    justify-content: flex-end;
-    width:70%;
-    
-}
+
 .formitems{
     display:flex; 
     align-items:center ;

@@ -13,6 +13,7 @@ export const logout = () => {
 };
 
 export const update = (payload) => {
+  // console.log("payload=======>",payload);
    return {
      type: ACTIONTYPE.UPDATE,
      payload: payload,

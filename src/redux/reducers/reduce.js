@@ -8,6 +8,7 @@ const initialvalues = {
 };
 
 const Reducer = (state = initialvalues, action) => {
+  console.log("action====>",action);
   switch (action.type) {
     case ACTIONTYPE.LOGIN:
       return {

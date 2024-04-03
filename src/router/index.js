@@ -5,28 +5,29 @@ import { useSelector } from "react-redux";
 function Router() {
   const data = useSelector((state) => state?.Reducer);
 
-  const PublicRouter = ({ element }) => {
-    return !data?.isLoggedIn ? element : Navigate("/dashboard");
-  };
+  // const PublicRouter = ({ element }) => {
+  //   return !data?.isLoggedIn ? element : Navigate("/dashboard");
+  // };
 
-  const PrivateRouter = ({ element }) => {
-    return data?.isLoggedIn ? element : Navigate("/login");
-  };
+  // const PrivateRouter = ({ element }) => {
+  //   return data?.isLoggedIn ? element : Navigate("/login");
+  // };
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path="/register"
-          element={<PublicRouter element={<Register />} />}
+          path="/register" element={<Register />}
+          // element={<PublicRouter element={<Register />} />}
         />
-        <Route path="/login"
-         element={<PublicRouter element={<Login />} />} />
+        <Route path="/login" element={<Login />}
+        //  element={<PublicRouter element={<Login />} />} 
+        />
         <Route
-          path="/dashboard"
-          element={<PrivateRouter element={<Dashboard />} />}
+          path="/dashboard" element={<Dashboard />}
+          // element={<PrivateRouter element={<Dashboard />} />}
         />
-        <Route path="/profile" 
-        element={<PrivateRouter  element={<Profile/>}/> }
+        <Route path="/profile"  element={<Profile/>}
+        // element={<PrivateRouter  element={<Profile/>}/> }
         />
         <Route path="/*" element={<Page404 />} />
       </Routes>

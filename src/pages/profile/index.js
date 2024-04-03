@@ -5,18 +5,14 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import ErrorHandle from '../../components/errorHandle';
 import { update } from '../../redux/action';
-import {useState} from "react";
-const defaultvalues = {
-   name:'',
-   email:'',
-   password:''
-}
+import { register } from '../../redux/action';
+
 
 const emailRegExp =
   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 const validationSchema = yup.object().shape({
-    name: yup
+    username: yup
      .string()
      .max(20, "name must be less than 20 characters")
      .required("Required*"),
@@ -30,37 +26,42 @@ const validationSchema = yup.object().shape({
      .required("Required*"),
 });
 function Profile(){
-   const [Editing,setEditing] = useState(false);
    const userProfile = useSelector((state)=>state?.Reducer) ;
-   // console.log("user profile", userProfile);
+   //  console.log("user profile", userProfile);
+
+   const userRegistered = useSelector((state)=>state?.Registerreduce)
+   console.log("user registered===>",userRegistered);
    const dispatch = useDispatch();
     
    const onSubmit = (values) =>{
-      console.log("values",values);
-      dispatch(update(values));
-      setEditing(false);
+      // console.log("values",values);
+      dispatch(update(values));  
+      dispatch(register(values));
    }
+
    const formik = useFormik({
-      initialValues: Editing ? defaultvalues : userProfile,
+      initialValues: {
+        username: userProfile.name,
+        email:userProfile.email,
+        password:userProfile.password
+      },
       onSubmit:onSubmit,
       validationSchema:validationSchema,
       enableReinitialize: true 
    })
 
-   const handleUpdate = () =>{
-      setEditing(true);
-   }
-    const {handleSubmit,setFieldValue,values,touched,errors,setTouched} = formik;
+    const {handleSubmit,setFieldValue,touched,values,errors,setTouched} = formik;
+   //  console.log("values-->",values);
     return(
         <div>
          
           <form onSubmit={handleSubmit} className='forms'>
                 <div className='formitems'>
                    <label>Name:</label>
-                   <input name="name" value={values.name} onChange={(e)=>setFieldValue("name",e.target.value)} onBlur={()=>{setTouched({...touched , name: true })}}/>
+                   <input name="username" value={values.username} onChange={(e)=>setFieldValue("username",e.target.value)} onBlur={()=>{setTouched({...touched , username: true })}}/>
                 </div>
                 
-                <ErrorHandle touched={touched} errors={errors} fieldName="name"/>
+                <ErrorHandle touched={touched} errors={errors} fieldName="username"/>
                 
                  <div className='formitems'>
                    <label>Email:</label>
@@ -75,16 +76,12 @@ function Profile(){
                 </div>
              
                 <ErrorHandle touched={touched} errors={errors}  fieldName="password"/>
-              
+                <div className='profilebtn'>
+                    <button type="submit">Submit</button>
+                </div>
            </form>
-       <div className='btns'>
-           <div className='profilebtn'>
-              <button type="button" onClick={handleUpdate}>Update</button>
-            </div>
-           <div className='profilebtn'>
-              <button type="submit" onClick={handleSubmit}>Submit</button>
-            </div>
-        </div>
+      
+          
     </div>
        
     )
