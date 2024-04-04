@@ -10,7 +10,7 @@ import * as yup from "yup";
 import {useNavigate} from 'react-router-dom';
 import ErrorHandle from "../../components/errorHandle/index";
 import {toast} from "react-toastify";
-import {TOAST_MESSAGE} from "../../toastify";
+import {TOAST_MESSAGE} from "../../constant";
 import {useDispatch, useSelector} from "react-redux";
 import { register } from "../../redux/action";
 
@@ -52,7 +52,8 @@ function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-const storeddata = useSelector((state)=>state?.Registerreduce)
+const storeddata = useSelector((state)=>state?.Registerreduce);
+console.log("storreddata====>",storeddata);
 
   const onSubmit = (values) => {
      let emailarray = storeddata.registerUser?.map((obj) => {
