@@ -53,7 +53,7 @@ function Register() {
   const navigate = useNavigate();
 
 const storeddata = useSelector((state)=>state?.Registerreduce);
-console.log("storreddata====>",storeddata);
+// console.log("storreddata====>",storeddata);
 
   const onSubmit = (values) => {
      let emailarray = storeddata.registerUser?.map((obj) => {

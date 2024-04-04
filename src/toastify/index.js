@@ -3,6 +3,7 @@
            Logincheck: "Your credentials are not valid",
            Register:"Register successfully",
            Emailcheck:"Email Already exists",
-           Logout:"Logout sucessfully"
+           Logout:"Logout sucessfully",
+           PROFILE:"Profile Created Sucessfully"
 }
 

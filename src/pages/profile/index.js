@@ -6,6 +6,9 @@ import * as yup from "yup";
 import ErrorHandle from "../../components/errorHandle";
 import { update } from "../../redux/action";
 import { register } from "../../redux/action";
+// import { Toast } from "react-toastify/dist/components";
+// import { TOAST_MESSAGE } from "../../constant";
+import {useNavigate} from 'react-router-dom';
 
 const emailRegExp =
   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -22,50 +25,29 @@ const validationSchema = yup.object().shape({
   password: yup
     .string()
     .min(4, "password must be 4 character")
-    .required("Required*"),
-  password1: yup
-    .string()
-    .min(4, "password must be 4 character")
-    .required("Required*"),
+    .required("Required*")
 });
 function Profile() {
   const userProfile = useSelector((state) => state?.Reducer);
-  console.log("user profile", userProfile);
-
+  // console.log("user profile", userProfile);
+   
+  const navigate = useNavigate();
   const storeddata = useSelector((state) => state?.Registerreduce);
   console.log("user registered===>", storeddata);
   const dispatch = useDispatch();
   const onSubmit = (values) => {
+ 
     const filterdusers = storeddata.registerUser?.filter((user) => {
       return user.email !== userProfile.email;
     });
-
+  
     filterdusers?.push(values);
     dispatch(register(filterdusers));
     dispatch(update(values));
-  };
 
-  // if(updatedvalue){
-  //   storeddata.registerUser [updatedvalue.payload];
-  //   dispatch(register(...storeddata , storeddata.registerUser));
-  // }
-
-  // console.log("updated data=======>",updatedvalue);
-
-  //  const emailArray = storeddata.registerUser?.map((obj)=>{
-  //   return obj.email;
-  //  })
-
-  //  console.log("emailArray====>",emailArray);
-
-  // if(!emailArray?.includes(values.email)){
-  //     alert("go with same email")
-  // }
-  // else{
-  //   const registerUser = Array.isArray(storeddata.registerUser) ?
-  //   [storeddata.registerUser.push(values)] : [];
-  //    dispatch(register(storeddata.registerUser));
-  // }
+  //  Toast.success(TOAST_MESSAGE.PROFILE);
+    navigate('/tabledashboard');
+  }
 
   const formik = useFormik({
     initialValues: {
